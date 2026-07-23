@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Difference the Chart — Tesla's Robotaxi Miles, Q2 2026 | The Kwizerana Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#190B24;
+    --purple:#652D90;
+    --purple-deep:#4A2069;
+    --lavender:#CAC4EA;
+    --lavender-tint:#F1EEFA;
+    --orange:#DD7045;
+    --paper:#FBF9FF;
+    --ink:#2B1B38;
+    --ink-soft:#5B4C6B;
+    --rule: rgba(101,45,144,0.16);
+    --robust:#2E8B57;
+    --dead:#A23B3B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Instrument Sans', sans-serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:'Sora', sans-serif;margin:0;}
+  code,.mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--purple);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--lavender-tint) 0%, var(--paper) 100%);
+    padding:44px 0 36px;border-bottom:1px solid var(--rule);
+  }
+  .masthead{display:flex;align-items:center;gap:8px;margin-bottom:28px;}
+  .masthead img{height:20px;}
+  .masthead span{
+    font-family:'Sora', sans-serif;font-weight:700;font-size:13px;
+    letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);
+  }
+  .eyebrow{
+    font-family:'Sora', sans-serif;font-weight:700;font-size:12.5px;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;
+  }
+  .hero h1{font-size:34px;font-weight:800;color:var(--plum);letter-spacing:-0.01em;line-height:1.15;margin-bottom:16px;}
+  .hero p.sub{font-size:17.5px;color:var(--ink-soft);max-width:56ch;margin:0 0 18px;}
+  .byline{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-soft);}
+
+  /* ---------- Stat grid ---------- */
+  .stats{padding:32px 0 8px;}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .stat{background:var(--lavender-tint);border-radius:10px;padding:16px 18px;}
+  .stat .num{font-family:'Sora', sans-serif;font-weight:800;font-size:24px;color:var(--purple);line-height:1.1;}
+  .stat .delta{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--robust);margin-top:2px;}
+  .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px;}
+
+  /* ---------- Body sections ---------- */
+  .section{padding:30px 0 6px;}
+  .section p{margin:0 0 14px;color:var(--ink);}
+  .section h2{font-size:22px;font-weight:700;color:var(--purple);margin-bottom:14px;}
+
+  /* ---------- Kwizerana Read callout ---------- */
+  .kread{
+    background:var(--plum);color:var(--lavender);
+    border-radius:16px;padding:30px 26px;margin:8px 0;
+  }
+  .kread .keyebrow{
+    font-family:'IBM Plex Mono', monospace;font-size:11px;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--orange);margin-bottom:10px;
+  }
+  .kread h2{color:#fff;font-size:21px;margin-bottom:12px;}
+  .kread p{color:var(--lavender);opacity:0.94;margin:0 0 14px;}
+
+  .chartrow{display:flex;gap:24px;margin:22px 0 10px;flex-wrap:wrap;}
+  .chartgroup{flex:1;min-width:210px;}
+  .chartgroup .glabel{
+    font-family:'IBM Plex Mono', monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:0.06em;color:rgba(202,196,234,0.65);margin-bottom:12px;
+  }
+  .bars{display:flex;align-items:flex-end;gap:12px;height:110px;}
+  .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .bar .fill{width:100%;border-radius:5px 5px 0 0;background:var(--lavender);}
+  .bar .val{font-family:'IBM Plex Mono', monospace;font-size:11px;color:#fff;margin-bottom:6px;font-weight:500;}
+  .bar .lbl{font-size:11px;color:rgba(202,196,234,0.75);margin-top:8px;text-align:center;}
+  .chart-pill{
+    display:inline-block;margin-top:14px;background:rgba(221,112,69,0.16);
+    border:1px solid rgba(221,112,69,0.4);color:var(--orange);
+    font-family:'IBM Plex Mono', monospace;font-size:11.5px;
+    padding:5px 12px;border-radius:20px;
+  }
+  .kread .caption{font-size:12.5px;color:rgba(202,196,234,0.6);margin-top:16px;}
+
+  /* ---------- Pull quote ---------- */
+  .pullquote{
+    border-left:3px solid var(--orange);padding:2px 0 2px 18px;margin:20px 0;
+  }
+  .pullquote p{font-family:'Sora', sans-serif;font-size:18px;font-weight:600;color:var(--plum);margin:0;line-height:1.4;}
+  .pullquote cite{font-size:13px;color:var(--ink-soft);font-style:normal;display:block;margin-top:8px;}
+
+  /* ---------- Verdict ---------- */
+  .verdict{padding:8px 0 6px;}
+  .vcard{border:1px solid var(--rule);border-radius:12px;padding:20px 20px;margin-bottom:14px;}
+  .vchip{
+    display:inline-block;font-family:'Sora', sans-serif;font-weight:800;font-size:12px;
+    letter-spacing:0.08em;padding:4px 12px;border-radius:20px;margin-bottom:12px;color:#fff;
+  }
+  .vcard.robust .vchip{background:var(--robust);}
+  .vcard.fragile .vchip{background:var(--orange);}
+  .vcard.dead .vchip{background:var(--dead);}
+  .vcard h3{font-size:17px;color:var(--plum);margin-bottom:8px;}
+  .vcard.dead h3{text-decoration:line-through;text-decoration-color:var(--dead);text-decoration-thickness:2px;}
+  .vcard p{margin:0;color:var(--ink);font-size:15.5px;}
+
+  /* ---------- Data-log tie-in ---------- */
+  .tiein{background:var(--lavender-tint);border-radius:14px;padding:26px 24px;margin:26px 0 8px;}
+  .tiein .keyebrow{
+    font-family:'IBM Plex Mono', monospace;font-size:11px;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--purple);margin-bottom:10px;
+  }
+  .tiein h2{font-size:19px;margin-bottom:12px;}
+  .tiein p{margin:0 0 10px;font-size:15.5px;color:var(--ink);}
+  .tiein p:last-child{margin-bottom:0;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:36px 0 56px;border-top:1px solid var(--rule);text-align:center;}
+  footer img.mark{width:26px;height:auto;margin-bottom:14px;opacity:0.9;}
+  footer .manifesto{
+    font-family:'Sora', sans-serif;font-style:italic;font-weight:600;color:var(--purple);
+    font-size:15.5px;margin-bottom:16px;
+  }
+  .sources{font-size:12.5px;color:var(--ink-soft);max-width:52ch;margin:0 auto 10px;line-height:1.7;}
+  .sources a{color:var(--ink-soft);text-decoration:underline;}
+  .fine{font-size:12px;color:var(--ink-soft);max-width:48ch;margin:0 auto;opacity:0.85;}
+
+  @media (min-width:560px){
+    .statgrid{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:480px){
+    .hero h1{font-size:27px;}
+    .kread{padding:22px 18px;border-radius:12px;}
+  }
+</style>
+</head>
+<body>
+<!-- KWIZERANA_THESIS_NAV_START -->
+<div style="position:sticky;top:0;z-index:9999;background:#FBF9FF;border-bottom:1px solid rgba(101,45,144,.16);font-family:'Instrument Sans',Arial,Helvetica,sans-serif;">
+  <div style="max-width:1120px;margin:0 auto;padding:10px 24px;display:flex;gap:14px;align-items:center;justify-content:space-between;color:#5B4C6B;font-size:13px;">
+    <a href="../../" style="color:#190B24;text-decoration:none;font-weight:800;letter-spacing:.12em;text-transform:uppercase;">Kwizerana Thesis Hub</a>
+    <span style="display:flex;gap:12px;align-items:center;">
+      <a href="../../" style="color:#652D90;text-decoration:none;font-weight:800;">Latest</a>
+      <a href="../../archive/" style="color:#5B4C6B;text-decoration:none;">Archive</a>
+    </span>
+  </div>
+</div>
+<!-- KWIZERANA_THESIS_NAV_END -->
+
+<section class="hero">
+  <div class="wrap">
+    <div class="masthead">
+      <img alt="Kwizerana" src="data:image/png;base64,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">
+      <span>The Kwizerana Brief</span>
+    </div>
+    <div class="eyebrow">Special Edition · Earnings Read</div>
+    <h1>Difference the Chart Before You Trust It: Tesla's Robotaxi Miles, Q2 2026</h1>
+    <p class="sub">Tesla's headline chart says Robotaxi is climbing. Quarter over quarter, its own numbers say it flattened. Here's the math, and what we think it means.</p>
+    <div class="byline">Tesla Q2 2026 earnings · reported July 22, 2026</div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="statgrid">
+      <div class="stat"><div class="num">$28.2B</div><div class="delta">↑ 26% YoY</div><div class="lbl">Revenue</div></div>
+      <div class="stat"><div class="num">480,126</div><div class="delta">↑ 25% YoY</div><div class="lbl">Vehicles delivered</div></div>
+      <div class="stat"><div class="num">1.48M</div><div class="delta">↑ 56% YoY</div><div class="lbl">Active FSD subscriptions</div></div>
+      <div class="stat"><div class="num">~2.4M</div><div class="delta" style="color:var(--orange);">cumulative</div><div class="lbl">Paid Robotaxi miles</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p>The quarter's core business numbers are unambiguous: record deliveries, revenue crossing $100 billion on a trailing-twelve-month basis for the first time, and FSD subscriptions growing faster than the fleet itself. Net income, meanwhile, fell sharply and missed estimates even as revenue beat — the AI buildout is being funded by the car business, not yet by the robotaxi business.</p>
+    <p>But the number getting the most airtime on the call is cumulative paid Robotaxi miles, presented as a climbing line on Tesla's own shareholder chart. We wanted to know what that line looks like once you stop looking at it cumulatively.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="kread">
+    <div class="keyebrow">Kwizerana Read</div>
+    <h2>A cumulative chart only goes one direction</h2>
+    <p>That's the whole reason to put one in front of investors — it always slopes up, no matter what happened quarter to quarter. The honest read is to difference the quarter-end totals. Do that with Tesla's own numbers, and the growth story changes.</p>
+
+    <div class="chartrow">
+      <div class="chartgroup">
+        <div class="glabel">Paid miles added, by quarter</div>
+        <div class="bars">
+          <div class="bar"><div class="val">900K</div><div class="fill" style="height:90%;"></div><div class="lbl">Q1 2026</div></div>
+          <div class="bar"><div class="val">900K</div><div class="fill" style="height:90%;"></div><div class="lbl">Q2 2026</div></div>
+        </div>
+        <span class="chart-pill">quarter over quarter: flat</span>
+      </div>
+      <div class="chartgroup">
+        <div class="glabel">Within Q2, by month</div>
+        <div class="bars">
+          <div class="bar"><div class="val">500K</div><div class="fill" style="height:50%;"></div><div class="lbl">Apr</div></div>
+          <div class="bar"><div class="val">200K</div><div class="fill" style="height:20%;"></div><div class="lbl">May</div></div>
+          <div class="bar"><div class="val">200K</div><div class="fill" style="height:20%;"></div><div class="lbl">Jun</div></div>
+        </div>
+        <span class="chart-pill">cooled off after April</span>
+      </div>
+    </div>
+    <p class="caption">Figures derived by differencing Tesla's own cumulative paid-miles chart, quarter and month over month. Same scale used across both charts.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>What the mile count doesn't say about safety</h2>
+    <p>The most recent public safety tally, compiled through mid-January 2026, put Tesla's Austin Robotaxi service at 14 crashes across roughly 800,000 cumulative paid miles — about one incident every 57,000 miles. Tesla's own Vehicle Safety Report benchmarks the average US driver at one minor collision per 229,000 miles, which puts the robotaxi fleet at roughly four times that rate, by Tesla's own yardstick. FSD software is also currently under an active NHTSA probe.</p>
+    <div class="pullquote">
+      <p>"If we injure even one person, it will be worldwide headline news, and regulators will immediately clamp down on our activities."</p>
+      <cite>— Elon Musk, Q2 2026 earnings call</cite>
+    </div>
+    <p>It's the right instinct, and it's also why the pace of the rollout — not just the mileage total — is the number worth tracking next quarter.</p>
+  </div>
+</section>
+
+<section class="verdict wrap">
+  <div class="vcard robust">
+    <span class="vchip">ROBUST</span>
+    <h3>The core auto business funding the bet</h3>
+    <p>Record deliveries beating estimates by roughly 74,000 units, revenue growth accelerating, and an FSD subscriber base compounding at 56% year over year. Whatever happens with Robotaxi, the balance sheet behind it is real.</p>
+  </div>
+  <div class="vcard fragile">
+    <span class="vchip">FRAGILE</span>
+    <h3>The robotaxi growth narrative, specifically</h3>
+    <p>The cumulative chart is doing a lot of narrative work that the quarter-over-quarter numbers don't back up yet. Flat mileage growth, a mid-quarter slowdown, a safety rate still trailing Tesla's own driver benchmark, and an open federal probe are all live at once.</p>
+  </div>
+  <div class="vcard dead">
+    <span class="vchip">DEAD</span>
+    <h3>"Half the US mainland by end of 2025"</h3>
+    <p>Quietly downgraded across three straight guidance cycles, most recently to seven new cities in the first half of 2026. Worth remembering the next time a coverage timeline gets announced on a call.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tiein">
+    <div class="keyebrow">Show the Math</div>
+    <h2>Why we're watching the data trail, not just the mile count</h2>
+    <p>Every one of those paid miles is also a data event — GPS trace, cabin footage, a payment record. Right now, the only public account of it is one chart a company draws for its own shareholder deck, and outside readers have to reverse-engineer the real trend by hand, pixel by pixel, the way we just did above.</p>
+    <p>That's the same gap our attestation layer, Membrane, is built to close for AI agents: instead of a single aggregate curve you have to trust, individually verifiable, timestamped records anyone can check. Differencing a chart shouldn't be an investigative feat — it should be a number you can just look up.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="mark" alt="Kwizerana" src="data:image/png;base64,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">
+    <p class="manifesto">"Clear with your money. Careful with your trust. Growing with you."</p>
+    <p class="sources">Sources: Tesla Q2 2026 shareholder letter &amp; earnings call · <a href="https://electrek.co/2026/07/22/tesla-robotaxi-growth-flat-own-chart-q2-2026/" target="_blank" rel="noopener">Electrek</a> · <a href="https://www.cnbc.com/2026/07/22/tesla-tsla-q2-2026-earnings-report.html" target="_blank" rel="noopener">CNBC</a> · <a href="https://www.techtimes.com/articles/321310/20260722/tesla-q2-2026-earnings-record-480k-deliveries-325b-cash-burn-active-nhtsa-fsd-probe.htm" target="_blank" rel="noopener">TechTimes</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/tesla-q2-preview-numbers-beat-181919296.html" target="_blank" rel="noopener">Yahoo Finance / Morgan Stanley &amp; Barclays research</a></p>
+    <p class="fine">Kwizerana Finance is not affiliated with Tesla. This is a read on public earnings data, not investment advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>
