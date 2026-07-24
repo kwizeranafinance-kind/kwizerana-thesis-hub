@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installing Hermes — the Kwizerana Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#190B24;
+    --purple:#652D90;
+    --purple-deep:#4A2069;
+    --lavender:#CAC4EA;
+    --lavender-tint:#F1EEFA;
+    --orange:#DD7045;
+    --paper:#FBF9FF;
+    --ink:#2B1B38;
+    --ink-soft:#5B4C6B;
+    --rule: rgba(101,45,144,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Instrument Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:'Sora', sans-serif;margin:0;}
+  code, .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--purple);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--lavender-tint) 0%, var(--paper) 100%);
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--rule);
+  }
+  .hero img.lockup{height:40px;display:block;margin-bottom:40px;}
+  .eyebrow{
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--orange);
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:38px;
+    font-weight:800;
+    color:var(--plum);
+    letter-spacing:-0.01em;
+    line-height:1.12;
+    margin-bottom:18px;
+  }
+  .hero p.sub{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0;
+  }
+
+  /* ---------- Intro ---------- */
+  .intro{padding:40px 0 8px;}
+  .intro p{font-size:17.5px;color:var(--ink);}
+  .intro p.lede{font-size:19px;color:var(--plum);font-weight:500;}
+
+  /* ---------- Steps ---------- */
+  .steps{padding:20px 0 8px;}
+  .step{
+    display:flex;
+    gap:20px;
+    padding:36px 0;
+    border-top:1px solid var(--rule);
+  }
+  .step:first-child{border-top:none;}
+  .num{
+    flex:0 0 auto;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--orange);
+    color:var(--plum);
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .step-body{flex:1;min-width:0;}
+  .step h2{font-size:21px;font-weight:700;color:var(--purple);margin-bottom:10px;}
+  .step p{margin:0 0 12px;color:var(--ink);}
+  .step p:last-child{margin-bottom:0;}
+  .step .note{
+    font-size:15px;
+    color:var(--ink-soft);
+    border-left:3px solid var(--lavender);
+    padding-left:14px;
+    margin-top:14px;
+  }
+  .codebox{
+    background:var(--lavender-tint);
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--purple-deep);
+    overflow-x:auto;
+    margin:14px 0;
+  }
+  .prompts{margin:14px 0 0;padding:0;list-style:none;}
+  .prompts li{
+    font-size:15px;
+    color:var(--ink-soft);
+    background:var(--lavender-tint);
+    border-radius:8px;
+    padding:10px 14px;
+    margin-bottom:8px;
+  }
+  .prompts li b{color:var(--purple);font-weight:600;}
+
+  /* ---------- Membrane signature block ---------- */
+  .membrane{
+    background:var(--plum);
+    border-radius:16px;
+    padding:36px 28px;
+    color:var(--lavender);
+    margin:8px 0 40px;
+  }
+  .membrane .num{background:var(--orange);color:var(--plum);}
+  .membrane h2{color:#fff;font-size:22px;margin-bottom:12px;}
+  .membrane p{color:var(--lavender);opacity:0.92;margin:0 0 14px;}
+  .ledger{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(202,196,234,0.22);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    line-height:1.9;
+    overflow-x:auto;
+    white-space:pre;
+  }
+  .ledger .ok{color:var(--orange);}
+  .ledger .hash{color:rgba(202,196,234,0.55);}
+  .ledger .action{color:#fff;}
+  .membrane .caption{
+    font-size:13px;
+    color:rgba(202,196,234,0.7);
+    margin-top:-6px;
+  }
+  .membrane .callout{
+    font-size:15px;
+    background:rgba(221,112,69,0.12);
+    border:1px solid rgba(221,112,69,0.35);
+    border-radius:8px;
+    padding:12px 14px;
+    color:var(--lavender);
+    margin-top:16px;
+  }
+  .membrane .callout b{color:var(--orange);}
+
+  /* ---------- Proof wall mockup ---------- */
+  .proofwall{
+    background:var(--paper);
+    border-radius:12px;
+    overflow:hidden;
+    margin:20px 0 8px;
+    box-shadow:0 14px 34px rgba(0,0,0,0.35);
+  }
+  .proofwall .chrome{
+    background:#E4DEF3;
+    padding:9px 12px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .proofwall .dot{width:9px;height:9px;border-radius:50%;}
+  .proofwall .dot.r{background:#ED6A5E;}
+  .proofwall .dot.y{background:#F4BF4F;}
+  .proofwall .dot.g{background:#61C554;}
+  .proofwall .addr{
+    margin-left:6px;background:#fff;border-radius:6px;
+    padding:5px 12px;font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;color:var(--ink-soft);flex:1;
+    display:flex;align-items:center;gap:6px;
+  }
+  .proofwall .page{padding:20px 20px 18px;}
+  .proofwall .page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .proofwall .brand-tag{
+    font-family:'IBM Plex Mono', monospace;font-size:11px;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--orange);font-weight:500;
+  }
+  .proofwall .agent-pill{
+    font-family:'IBM Plex Mono', monospace;font-size:11px;
+    background:var(--lavender-tint);color:var(--purple);
+    padding:3px 10px;border-radius:20px;
+  }
+  .proofwall h3{font-family:'Sora', sans-serif;font-size:17px;color:var(--plum);margin:8px 0 12px;}
+  .proofwall .row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--rule);}
+  .proofwall .row:first-of-type{border-top:none;}
+  .proofwall .check{
+    width:19px;height:19px;border-radius:50%;flex:0 0 auto;
+    background:#E9F6E7;color:#3C9A3C;
+    display:flex;align-items:center;justify-content:center;font-size:11px;
+  }
+  .proofwall .row-main{flex:1;min-width:0;}
+  .proofwall .row-action{font-family:'IBM Plex Mono', monospace;font-size:12.5px;color:var(--ink);}
+  .proofwall .row-meta{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .proofwall .row-link{font-size:12px;color:var(--orange);font-weight:500;white-space:nowrap;flex:0 0 auto;}
+  .proofwall .foot{
+    margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono', monospace;font-size:10px;letter-spacing:0.05em;
+    text-transform:uppercase;color:var(--ink-soft);text-align:center;
+  }
+  .explore-link{text-align:center;margin:6px 0 4px;}
+  .explore-link a{font-family:'Sora', sans-serif;font-weight:600;font-size:14.5px;text-decoration:none;}
+  .explore-link a:hover{text-decoration:underline;}
+  @media (max-width:480px){
+    .proofwall .row-meta{font-size:10.5px;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:40px 0 60px;
+    border-top:1px solid var(--rule);
+    text-align:center;
+  }
+  footer img.mark{width:28px;height:auto;margin-bottom:16px;opacity:0.9;}
+  footer .manifesto{
+    font-family:'Sora', sans-serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--purple);
+    font-size:16px;
+    margin-bottom:14px;
+  }
+  footer .fine{
+    font-size:13px;
+    color:var(--ink-soft);
+    max-width:48ch;
+    margin:0 auto;
+  }
+
+  @media (max-width:520px){
+    .hero{padding:40px 0 32px;}
+    .hero h1{font-size:30px;}
+    .hero p.sub{font-size:16.5px;}
+    .step{gap:14px;}
+    .membrane{padding:28px 20px;border-radius:12px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+<!-- KWIZERANA_THESIS_NAV_START -->
+<div style="position:sticky;top:0;z-index:9999;background:#FBF9FF;border-bottom:1px solid rgba(101,45,144,.16);font-family:Instrument Sans,Arial,Helvetica,sans-serif;">
+  <div style="max-width:1120px;margin:0 auto;padding:10px 24px;display:flex;gap:14px;align-items:center;justify-content:space-between;color:#5B4C6B;font-size:13px;">
+    <a href="../../" style="color:#190B24;text-decoration:none;font-weight:800;letter-spacing:.12em;text-transform:uppercase;">Kwizerana Thesis Hub</a>
+    <span style="display:flex;gap:12px;align-items:center;">
+      <a href="../../" style="color:#652D90;text-decoration:none;font-weight:800;">Latest</a>
+      <a href="../../archive/" style="color:#5B4C6B;text-decoration:none;">Archive</a>
+    </span>
+  </div>
+</div>
+<!-- KWIZERANA_THESIS_NAV_END -->
+
+
+<section class="hero">
+  <div class="wrap">
+    <img class="lockup" alt="Kwizerana"
+      src="data:image/png;base64,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">
+    <div class="eyebrow">A Kwizerana Field Guide</div>
+    <h1>Installing Hermes, the Kwizerana Way</h1>
+    <p class="sub">A plain-language setup guide for Hermes, the open personal AI agent — plus the step most setups skip: proof of what it actually did.</p>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <p class="lede">Hermes is a capable, memory-persistent agent. Connect it to your calendar, inbox, and tools, and it starts acting on your behalf. That's the appeal — and the catch.</p>
+    <p>Once something has that much reach into your day, "trust me" isn't good enough. Below is how we set Hermes up: install, connect, bring it to your phone, and shape it into something useful. Then, in the last step, we show how we'd close the gap with <strong>Membrane</strong>, our open attestation layer — so every action leaves a record you control, not one buried in someone else's database.</p>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-body">
+        <h2>Install Hermes</h2>
+        <p>Two ways in, both under a minute. If you'd rather not touch a terminal, get the desktop app at <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a> — pick your OS, download, open.</p>
+        <p>Comfortable in a terminal instead? One line, works across Mac, Linux, and Windows:</p>
+        <div class="codebox">curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</div>
+        <p>Either way, you land in the chat interface — your control center for everything after this.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-body">
+        <h2>Connect your tools</h2>
+        <p>On its own, Hermes can't see your calendar or your inbox. Composio is the bridge — it plugs over a thousand apps into Hermes. Paste this into the chat box and it installs itself:</p>
+        <div class="codebox">https://composio.dev/hermes</div>
+        <p>Then tell Hermes what to connect: calendar, email, task manager, Slack, GitHub — whatever you'd hand a real assistant. Hermes will walk you through authorizing each one.</p>
+        <p class="note">This is also the step worth slowing down on. You're deciding what Hermes can see. Connect what you'll actually use, not everything at once — you can always add more later.</p>
+        <p>While you're in settings, turn on <strong>persistent memory</strong> (so it recalls past conversations instead of starting cold each time) and <strong>skill generation</strong> (so completed tasks become reusable steps for next time).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-body">
+        <h2>Bring it to your phone</h2>
+        <p>The desktop app is fine at your desk, but the real unlock is reaching Hermes from anywhere. Pick a messaging platform you already live in — Telegram, WhatsApp, Slack, Signal, or Discord — and link it.</p>
+        <p>By default, Hermes locks to an allowlist, so it's only ever you (or whoever you explicitly add) who can message it or trigger a task. Once connected, you can fire off a background task from your phone and it'll report back in that same chat when it's done.</p>
+        <p class="note">Mid-task and changed your mind? Send "/stop" — no need to wait it out.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div class="step-body">
+        <h2>Learn its language</h2>
+        <p>A few starting prompts that pull real weight:</p>
+        <ul class="prompts">
+          <li><b>Calendar —</b> "What's on my calendar today? Flag any conflicts and tell me if I'm double booked."</li>
+          <li><b>Tasks —</b> "Pull my task list and tell me what's overdue or due in the next 3 days."</li>
+          <li><b>Slack —</b> "Check my DMs and unread channels. Summarize anything that actually needs a response from me."</li>
+        </ul>
+        <p>For anything recurring, Hermes has a built-in scheduler — "Every morning at 9, scan my inbox and send me a summary" runs itself from then on.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div class="step-body">
+        <h2>Make it yours</h2>
+        <p>Hermes ships capable but generic. Set a tone with <span class="mono" style="font-size:14px;">/personality direct</span> for work, or something looser for personal tasks. Swap the underlying model anytime by naming it, or just ask Hermes to switch. Pin a "home" chat with <span class="mono" style="font-size:14px;">/sethome</span> so there's always one place everything reports back to.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="membrane">
+    <div class="num">6</div>
+    <h2 style="margin-left:0;">Attest it — with Membrane</h2>
+    <p>Here's the part most setups stop short of. Hermes can now read your calendar, draft your email, and touch your task list. Once it's done, that action is invisible again — unless you go looking, and unless you trust what you find.</p>
+    <p><strong>Membrane</strong>, Kwizerana's open attestation layer, is our answer to that gap. Every tool call Hermes makes can be hashed, timestamped, and logged the moment it happens — a receipt you hold, not a claim you take on faith. Here's roughly what that looks like in practice:</p>
+    <div class="ledger"><span class="action">09:14:03  hermes.calendar.read</span>        <span class="ok">attested ✓</span>   <span class="hash">a9f3e1…c208</span>
+<span class="action">09:14:05  hermes.email.summarize</span>      <span class="ok">attested ✓</span>   <span class="hash">71e0b4…9ad2</span>
+<span class="action">09:41:22  hermes.task.create</span>          <span class="ok">attested ✓</span>   <span class="hash">3cc98a…104f</span>
+<span class="action">14:02:57  hermes.slack.draft_reply</span>    <span class="ok">attested ✓</span>   <span class="hash">e615f0…77b1</span></div>
+    <p class="caption">A demonstration of what an attested action log looks like — each entry a proof, not a promise.</p>
+
+    <p>And here's the same thing from the other side — what you, or anyone you send the link to, would actually open:</p>
+    <div class="proofwall">
+      <div class="chrome">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="addr">🔒&nbsp; wall.membrane.xyz/hermes-kris</div>
+      </div>
+      <div class="page">
+        <div class="page-head">
+          <span class="brand-tag">Membrane</span>
+          <span class="agent-pill">hermes-kris</span>
+        </div>
+        <h3>Attested actions</h3>
+        <div class="row">
+          <div class="check">✓</div>
+          <div class="row-main">
+            <div class="row-action">hermes.calendar.read</div>
+            <div class="row-meta">Today, 9:14 AM · a9f3e1…c208</div>
+          </div>
+          <div class="row-link">View proof →</div>
+        </div>
+        <div class="row">
+          <div class="check">✓</div>
+          <div class="row-main">
+            <div class="row-action">hermes.email.summarize</div>
+            <div class="row-meta">Today, 9:14 AM · 71e0b4…9ad2</div>
+          </div>
+          <div class="row-link">View proof →</div>
+        </div>
+        <div class="row">
+          <div class="check">✓</div>
+          <div class="row-main">
+            <div class="row-action">hermes.task.create</div>
+            <div class="row-meta">Today, 9:41 AM · 3cc98a…104f</div>
+          </div>
+          <div class="row-link">View proof →</div>
+        </div>
+        <div class="foot">Anchored to Avalanche C-Chain · Merkle-verified</div>
+      </div>
+    </div>
+    <p class="caption">A mockup of the hosted proof wall — the page a shared link like this one opens to.</p>
+
+    <p>This is our Your-Data-Log ritual applied to an agent instead of an account. Same idea, same reason: nothing is hidden, because nothing needs to be.</p>
+    <div class="callout"><b>For builders —</b> Membrane ships as open-core Python and JS SDKs. Wrapped around Hermes's tool-call layer, it attests before and after each call instead of leaving you to trust a changelog.</div>
+    <div class="explore-link"><a href="https://membrane.xyz" target="_blank" rel="noopener">Explore Membrane →</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="mark" alt="Kwizerana"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJsAAACDBAMAAABoynRJAAAAHlBMVEX8/PxlLY/ccEZVLHT04u1xTI/dbjrLr94AAAAAAAAUT7kfAAAACHRSTlMA/////////9XKVDIAAAcISURBVHjarVrfbxRVFP72zi2lok1DESG1dRlqUCm4DTEabcu1DPJgQngw4ZU330yTavwn0DT+AYYHHyTRBH1TV7zAiiiS1mpiYpplut0aiKFswYDA6V0f9vfMvXf2Dp2X3czMfvOdc88595xvNoNuDi6iZ/JIe/A4GAAEupOZLvDExWz8pAqFTAUX5FkMjhNQovi9LJkbIU6OAJBIA8elr7+QLaSBI90tHADT0EuEC2RWs4YEAQWpfUyqQwb4tkzO7CTjEPpL02l8Z3yO7mQinFDma8+mYUcOp7vwnc4sbrC2G9+R5ocCIE1YpA4UAFJt4srqM1JjhwzqFVJIF/sBwAOfLnWSfmV/X1/Pz1vvvbaroABWHTBy8dbi7CiPQx2nigAUgEu3eCpjPVUaCePVlnFyhmMAkFUxNIRgOaSDky7Z0PFILZzQlG8AXmp24SbFHQMw4xCU3bDbvIOlKE3NWNpkdhNauDnD3RvuCc+cwuqxfCc2Fy5pJcpOccfOWbuDQNczpl5ZSZqFtcLNWP0qQzff+QsWuAKBSye4R9K9O0jpO67NCSvcqDW/ZOjWBYySNSQVdzNWZV3z31YhWcm0sJwAnFGhEzs1JG25NwI3Y7P2yh4Kp/7uTulXY1nhgOIFbcExwfX7tmUNMDHh1C5mS5aOmj8sc+nku9JNW9SdEaSvhnqHV/fwA3VeJEqROZlkMcg7VGMOz5+Xsm3L4O1toizyvMtGT1Cyw5SAPjsFkOSCZB6KT0i3voEPHZDN0V0hz08B4AEgARUGBCc4rv4gUaBmr8wgGv2wCrkgcyHMAJj9NOrQ4QHZ5v08/FZPGuQdO3dAZL7g1GjbKd/mKx4QwCekqafXshvdJqMiR56LbtQTHTs2T3ERhroSYjRxx4YpdY8RZ+fjmsM8nMSOlR5n6ovCMZbtE+nholRGSlc3szf23wQgWg/hx+pfPgy6cUIk7tjwgpBoDGN84se3V5qXhkZPuxo7PADZ6BODseWLYxfa9rblE6OnAcuUWxuUXp9vRBaf+rz5nPfO/rdQrbTderuy/PvGZIiyAkSY7DtRPjzXSttLudhPGD0pA5AlBtvZsYUrqlaf+OyDXjYcg6uiuv/pXWFXvvM3fqOaZyi4kA/BtKlWwjWb71grfhcI4EICx34YCwF9E0LFQSl4IpzvzwMISAIif9BmjzpUoCQ4xg6TqNWz3sG2NWB+vC0rvWwPlCf2saemPq7NTKJ8PCy2RfX8P/sqUXrr+14IAa5M7ErDQT1CRKHarqr4AsFijJ/ynuGGmaimG7f2k56DKAKAr0IAb53VlH6A+W/MQSuLeABnqmEen1q/cwsAsH4bADt8Gejtq8Tib+3+KpjBWKJG7eZHBhW1TdLsNICCrjWj9/XGtsSNkCsVbulgMrrKp0L1V2wxgPV/V5NyloTIdZQ/thsEYEYThYxmkCS9lMfXrncs0zwEQvzSq/ld5d5qAjuRKXbyEDOQEtjQDBiKKaHbKVlzE+XyeMQqaRkZaWkHLBOjxIQX6pUKQ8Iv2Y2VuWLk2vP1dtY3ep2b4WZjYfmo/qnXBFhOM5c14XrPO26pS95M3HuNQBHZP2PBOnCj9jndG4/jbAXrgzvLSl/c+U8P4ztNr10BUsvbyLBXTGA9NGlQ/OKYHnLkK31WcBWu3I/fvv3vWsiq3RX9MLPzRnS/ZQAEATndXJZgdOjF1oIBkBCzxaxZg9pY1MNNhzn9ypZ37bm7Fm+Rmwmq53e9OnjyiibuOBXlUhr1qFjWhvEslC1iF409xJLQwFFoFzm+M12m6IvB2k42rlW7bjU4eA8HTE96bkDG2H2gbSKalGgjZyS+LDvKaAYAr/ZrBbfJZrfn9RubkuGFGLuDSdXDLAwqT8SUs3X9rQuab/HUWI+y80pJ7L43rzwbE9EkU48xmKi9hU44nuQ6AW5mp0rt9Jhxa2mT3Dl9bSnyK7ID7qhhl+hpKy22qU+d5O0VZdlQz7ZfbhXy6y9WLIPYO1tDN2XWtm2gWJYtYxNXAgA2LPobRpZ5C66rV3V0zlJzwiK14I52Ze2MdSh+VTThVNgN3Cc2J6ulXLOiGKtFhzhzbI1sj91y09ptxbO22m9NNYECAWDB8a7gkl7U7Kgpft5qjylAt29pM0/4vRWbpLBRa4/4A+MtjzolnnEru5XErOh8n8p9u4BSW1vWraRDWevmSXsDAGBeV2EHwT+yp3dNye32BbYEX7DSU+NCAGzOnIodTyKaXLTjSen06kgCNrwwB7c3UZPMtuUpjwPshAM9kbVFS3EM8F66brq853Z00a/e2GlLjbvvbs2Y249IcwQAPNOf1Vc0vwgmvkTGi41i+mamLmQc+QY9J3A+qyJJ5YMKQwMyo1GUan8AuWYRrvSplAcy+r/l1a86H/8Da21QPdChR8kAAAAASUVORK5CYII=">
+    <p class="manifesto">"Clear with your money. Careful with your trust. Growing with you."</p>
+    <p class="fine">Hermes is built and maintained by Nous Research. This guide reflects our own setup notes — not an official partnership. Membrane's Hermes integration above is a demonstration of the approach, not a shipped plugin.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-07-23",
+    "label": "July 23, 2026",
+    "title": "From One Assistant to a Workforce \u2014 Hermes, Part Two",
+    "summary": "Part One walked through installing a single Hermes agent and connecting it to your calendar and inbox. This part is about what changes once you're not running one agent, but several \u2014 and who's keeping track of what they hand each other.",
+    "topic": "Agent Infrastructure",
+    "slug": "hermes-agent-workforce-part-2",
+    "url": "../articles/hermes-agent-workforce-part-2/"
+  },
+  {
+    "date": "2026-07-23",
+    "label": "July 23, 2026",
+    "title": "Installing Hermes \u2014 the Kwizerana Way",
+    "summary": "A plain-language setup guide for Hermes, the open personal AI agent \u2014 plus the step most setups skip: proof of what it actually did.",
+    "topic": "Agent Infrastructure",
+    "slug": "hermes-install-guide",
+    "url": "../articles/hermes-install-guide/"
+  },
+  {
     "date": "2026-07-22",
     "label": "July 22, 2026",
     "title": "Difference the Chart Before You Trust It: Tesla's Robotaxi Miles, Q2 2026",
