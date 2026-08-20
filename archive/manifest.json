@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-08-20",
+    "label": "August 20, 2026",
+    "title": "Impermanent Loss, Explained Without the Fog",
+    "summary": "A plain-language DeFi education piece on impermanent loss: where the pooling versus holding gap comes from, how large it gets, and what actually offsets it.",
+    "topic": "DeFi Education",
+    "slug": "impermanent-loss-explained-without-the-fog",
+    "url": "../articles/impermanent-loss-explained-without-the-fog/"
+  },
+  {
     "date": "2026-07-23",
     "label": "July 23, 2026",
     "title": "From One Assistant to a Workforce \u2014 Hermes, Part Two",
